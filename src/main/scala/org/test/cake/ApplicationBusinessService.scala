@@ -5,11 +5,7 @@ class ApplicationBusinessService extends BusinessService{
 
   override def run: Boolean = {
     val user = User("3", "U-CCC")
-    val existingUser = dbService.getUser(user.id) match {
-      case None => false
-      case Some(_) => true
-    }
-    if(existingUser && userService.auth(user)) true
+    if(dbService.getUser(user.id).isDefined && userService.auth(user)) true
     else false
   }
 }
